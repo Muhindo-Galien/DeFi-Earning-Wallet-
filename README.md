@@ -15,9 +15,9 @@ For now the smart contract allows only 2 stable coins (DAI and USD).
 ## To contribute
 
 Create a working branch
- - for a feature ft/<feature-name>
- - for a bug fix/<issue or bug to fix>
- - for chore changes chore/<chore-name>
- - for refactoring refact/<refact-change>
- - for style changes style/<style-name>
- - for Readme updates doc/<update-name>
+ - for a feature `ft/<feature-name>`
+ - for a bug `fix/<issue or bug to fix>`
+ - for chore changes `chore/<chore-name>`
+ - for refactoring `refact/<refact-change>`
+ - for style changes `style/<style-name>`
+ - for Readme updates `doc/<update-name>`
