@@ -3,7 +3,7 @@
 This is a DeFi Wallet Earning Interest with Yearn Finance
 
 ## Current stage
-For now the smart contract allows only 2 stable coins (DAI and USD).
+For now the smart contract allows only 2 stable coins (DAI and USDC).
 
 ## Goal
 - Make the smart contract allows all stable coins,
