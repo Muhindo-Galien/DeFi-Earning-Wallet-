@@ -2,7 +2,8 @@ import { createGlobalState } from "react-hooks-global-state";
 
 const {setGlobalState, useGlobalState, getGlobalState }=createGlobalState({
   connectedAccount: '',
-  currentChain:''
+  currentChain:'',
+  contract:null,
 })
 
 const truncate = (text:string, startChar:number, endChars:number, maxLength:number) => {

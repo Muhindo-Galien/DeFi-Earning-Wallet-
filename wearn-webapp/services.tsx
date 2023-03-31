@@ -9,9 +9,14 @@ declare global {
     web3?: any;
   }
 }
-const { ethereum } = window;
-window.web3 = new Web3(ethereum);
-window.web3 = new Web3(window.web3.currentProvider);
+
+let ethereum: { request: (arg0: { method: string; }) => any; } | null = null;
+let web3 = null;
+
+if (typeof window !== 'undefined') {
+  ethereum = window.ethereum;
+  web3 = new Web3(ethereum || window.web3.currentProvider);
+}
 
 const connectWallet = async () => {
   try {
@@ -65,7 +70,22 @@ const isWallectConnected = async () => {
   }
 };
 
+const getEtheriumContract = async () => {
+  const connectedAccount = getGlobalState('connectedAccount');
+
+  if (connectedAccount) {
+    const web3 = window.web3;
+    const contract = new web3.eth.Contract('abi.abi', 'contractAddress');
+    setGlobalState('contract', await contract);
+
+    return contract;
+  } else {
+    return getGlobalState('contract');
+  }
+};
+
 export {
   connectWallet,
-  isWallectConnected
+  isWallectConnected,
+  getEtheriumContract
 }
