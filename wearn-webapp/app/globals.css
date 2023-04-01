@@ -4,11 +4,10 @@
 @tailwind utilities;
 
 body{
-  margin: 0;
-  padding: 0;
+  margin: 0 !important;
+  padding: 0 !important;
   box-sizing: border-box;
   overflow-x: hidden;
-  position: relative;
   min-height: 100vh;
   font-family: "Poppins", "sans-serif";
   background: rgb(244, 244, 252);

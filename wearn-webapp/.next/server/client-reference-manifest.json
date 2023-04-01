@@ -104,6 +104,84 @@
         "async": false
       }
     },
+    "(app-client)/./public/dailogo1.png": {
+      "*": {
+        "id": "(sc_client)/./public/dailogo1.png",
+        "chunks": [
+          "app/page:app/page"
+        ],
+        "name": "*",
+        "async": false
+      },
+      "": {
+        "id": "(sc_client)/./public/dailogo1.png",
+        "chunks": [
+          "app/page:app/page"
+        ],
+        "name": "",
+        "async": false
+      },
+      "default": {
+        "id": "(sc_client)/./public/dailogo1.png",
+        "chunks": [
+          "app/page:app/page"
+        ],
+        "name": "default",
+        "async": false
+      }
+    },
+    "(app-client)/./public/tether.png": {
+      "*": {
+        "id": "(sc_client)/./public/tether.png",
+        "chunks": [
+          "app/page:app/page"
+        ],
+        "name": "*",
+        "async": false
+      },
+      "": {
+        "id": "(sc_client)/./public/tether.png",
+        "chunks": [
+          "app/page:app/page"
+        ],
+        "name": "",
+        "async": false
+      },
+      "default": {
+        "id": "(sc_client)/./public/tether.png",
+        "chunks": [
+          "app/page:app/page"
+        ],
+        "name": "default",
+        "async": false
+      }
+    },
+    "(app-client)/./public/usdclogo.png": {
+      "*": {
+        "id": "(sc_client)/./public/usdclogo.png",
+        "chunks": [
+          "app/page:app/page"
+        ],
+        "name": "*",
+        "async": false
+      },
+      "": {
+        "id": "(sc_client)/./public/usdclogo.png",
+        "chunks": [
+          "app/page:app/page"
+        ],
+        "name": "",
+        "async": false
+      },
+      "default": {
+        "id": "(sc_client)/./public/usdclogo.png",
+        "chunks": [
+          "app/page:app/page"
+        ],
+        "name": "default",
+        "async": false
+      }
+    },
     "(app-client)/./app/page.tsx": {
       "*": {
         "id": "(sc_client)/./app/page.tsx",
@@ -325,6 +403,78 @@
     "id": "(app-client)/./node_modules/next/dist/client/components/render-from-template-context.js",
     "chunks": [
       "app-client-internals:app-client-internals"
+    ],
+    "name": "default",
+    "async": false
+  },
+  "/home/galien/Defi  projects/Wearn/wearn-webapp/public/dailogo1.png": {
+    "id": "(app-client)/./public/dailogo1.png",
+    "chunks": [
+      "app/page:app/page"
+    ],
+    "name": "*",
+    "async": false
+  },
+  "/home/galien/Defi  projects/Wearn/wearn-webapp/public/dailogo1.png#": {
+    "id": "(app-client)/./public/dailogo1.png",
+    "chunks": [
+      "app/page:app/page"
+    ],
+    "name": "",
+    "async": false
+  },
+  "/home/galien/Defi  projects/Wearn/wearn-webapp/public/dailogo1.png#default": {
+    "id": "(app-client)/./public/dailogo1.png",
+    "chunks": [
+      "app/page:app/page"
+    ],
+    "name": "default",
+    "async": false
+  },
+  "/home/galien/Defi  projects/Wearn/wearn-webapp/public/tether.png": {
+    "id": "(app-client)/./public/tether.png",
+    "chunks": [
+      "app/page:app/page"
+    ],
+    "name": "*",
+    "async": false
+  },
+  "/home/galien/Defi  projects/Wearn/wearn-webapp/public/tether.png#": {
+    "id": "(app-client)/./public/tether.png",
+    "chunks": [
+      "app/page:app/page"
+    ],
+    "name": "",
+    "async": false
+  },
+  "/home/galien/Defi  projects/Wearn/wearn-webapp/public/tether.png#default": {
+    "id": "(app-client)/./public/tether.png",
+    "chunks": [
+      "app/page:app/page"
+    ],
+    "name": "default",
+    "async": false
+  },
+  "/home/galien/Defi  projects/Wearn/wearn-webapp/public/usdclogo.png": {
+    "id": "(app-client)/./public/usdclogo.png",
+    "chunks": [
+      "app/page:app/page"
+    ],
+    "name": "*",
+    "async": false
+  },
+  "/home/galien/Defi  projects/Wearn/wearn-webapp/public/usdclogo.png#": {
+    "id": "(app-client)/./public/usdclogo.png",
+    "chunks": [
+      "app/page:app/page"
+    ],
+    "name": "",
+    "async": false
+  },
+  "/home/galien/Defi  projects/Wearn/wearn-webapp/public/usdclogo.png#default": {
+    "id": "(app-client)/./public/usdclogo.png",
+    "chunks": [
+      "app/page:app/page"
     ],
     "name": "default",
     "async": false
