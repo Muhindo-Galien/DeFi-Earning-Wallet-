@@ -31,7 +31,7 @@ const deployRaffle: DeployFunction = async function (
         log: true,
         waitConfirmations: waitBlockConfirmations,
     })
-    log("Wallet contract deployed at address: ", wallet.Wallet)
+    log("Wallet contract deployed at address: ", wallet.address)
 
 }
 export default deployRaffle

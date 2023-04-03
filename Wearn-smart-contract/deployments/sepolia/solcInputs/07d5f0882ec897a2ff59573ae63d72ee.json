@@ -1,0 +1,38 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+      "content": "// SPDX-License-Identifier: MIT\n// OpenZeppelin Contracts (last updated v4.6.0) (token/ERC20/IERC20.sol)\n\npragma solidity ^0.8.0;\n\n/**\n * @dev Interface of the ERC20 standard as defined in the EIP.\n */\ninterface IERC20 {\n    /**\n     * @dev Emitted when `value` tokens are moved from one account (`from`) to\n     * another (`to`).\n     *\n     * Note that `value` may be zero.\n     */\n    event Transfer(address indexed from, address indexed to, uint256 value);\n\n    /**\n     * @dev Emitted when the allowance of a `spender` for an `owner` is set by\n     * a call to {approve}. `value` is the new allowance.\n     */\n    event Approval(address indexed owner, address indexed spender, uint256 value);\n\n    /**\n     * @dev Returns the amount of tokens in existence.\n     */\n    function totalSupply() external view returns (uint256);\n\n    /**\n     * @dev Returns the amount of tokens owned by `account`.\n     */\n    function balanceOf(address account) external view returns (uint256);\n\n    /**\n     * @dev Moves `amount` tokens from the caller's account to `to`.\n     *\n     * Returns a boolean value indicating whether the operation succeeded.\n     *\n     * Emits a {Transfer} event.\n     */\n    function transfer(address to, uint256 amount) external returns (bool);\n\n    /**\n     * @dev Returns the remaining number of tokens that `spender` will be\n     * allowed to spend on behalf of `owner` through {transferFrom}. This is\n     * zero by default.\n     *\n     * This value changes when {approve} or {transferFrom} are called.\n     */\n    function allowance(address owner, address spender) external view returns (uint256);\n\n    /**\n     * @dev Sets `amount` as the allowance of `spender` over the caller's tokens.\n     *\n     * Returns a boolean value indicating whether the operation succeeded.\n     *\n     * IMPORTANT: Beware that changing an allowance with this method brings the risk\n     * that someone may use both the old and the new allowance by unfortunate\n     * transaction ordering. One possible solution to mitigate this race\n     * condition is to first reduce the spender's allowance to 0 and set the\n     * desired value afterwards:\n     * https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729\n     *\n     * Emits an {Approval} event.\n     */\n    function approve(address spender, uint256 amount) external returns (bool);\n\n    /**\n     * @dev Moves `amount` tokens from `from` to `to` using the\n     * allowance mechanism. `amount` is then deducted from the caller's\n     * allowance.\n     *\n     * Returns a boolean value indicating whether the operation succeeded.\n     *\n     * Emits a {Transfer} event.\n     */\n    function transferFrom(\n        address from,\n        address to,\n        uint256 amount\n    ) external returns (bool);\n}\n"
+    },
+    "contracts/Wallet.sol": {
+      "content": "// SPDX-License-Identifier:MIT\nimport \"@openzeppelin/contracts/token/ERC20/IERC20.sol\";\n\npragma solidity ^0.8.7;\n\nerror Wallet__NotOwner();\n\ninterface IyDAI {\n    function deposit(uint256 _amount) external;\n\n    function withdraw(uint256 _shares) external;\n\n    function balanceOf(address account) external view returns (uint256);\n\n    function getPricePerFullShare() external view returns (uint256);\n}\n\ninterface IyUSDC {\n    function deposit(uint256 _amount) external;\n\n    function withdraw(uint256 _shares) external;\n\n    function balanceOf(address account) external view returns (uint256);\n\n    function getPricePerFullShare() external view returns (uint256);\n}\n\ncontract Wallet {\n    address admin;\n\n    IERC20 dai = IERC20(0x68194a729C2450ad26072b3D33ADaCbcef39D574);\n    IyDAI yDai = IyDAI(0xC2cB1040220768554cf699b0d863A3cd4324ce32);\n\n    IERC20 usdc = IERC20(0xda9d4f9b69ac6C22e444eD9aF0CfC043b7a7f53f);\n    IyUSDC yUsdc = IyUSDC(0x26EA744E5B887E5205727f55dFBE8685e3b21951);\n\n    constructor() {\n        admin = msg.sender;\n    }\n\n    function save(uint _amount) external {\n        dai.transferFrom(msg.sender, address(this), _amount);\n        _save(_amount);\n    }\n\n    function saveUSDC(uint _amount) external {\n        usdc.transferFrom(msg.sender, address(this), _amount);\n        _saveUSDC(_amount);\n    }\n\n    function spend(uint amount, address recipient) external {\n        if (msg.sender != admin) revert Wallet__NotOwner();\n        uint balanceSharesDAI = yDai.balanceOf(address(this));\n        uint balanceSharesUSDC = yUsdc.balanceOf(address(this));\n        if (balanceSharesDAI > 0) {\n            yDai.withdraw(balanceSharesDAI);\n            dai.transfer(recipient, amount);\n            uint balanceDAI = dai.balanceOf(address(this));\n            if (balanceDAI > 0) {\n                _save(balanceDAI);\n            }\n        } else if (balanceSharesUSDC > 0) {\n            yUsdc.withdraw(balanceSharesUSDC);\n            usdc.transfer(recipient, amount);\n            uint balanceUSDC = usdc.balanceOf(address(this));\n            if (balanceUSDC > 0) {\n                _saveUSDC(balanceUSDC);\n            }\n        } else {\n            revert(\"No funds available for spending\");\n        }\n    }\n\n    function balance() external view returns (uint) {\n        uint price = yDai.getPricePerFullShare();\n        uint balanceShares = yDai.balanceOf(address(this));\n        return price * balanceShares;\n    }\n\n    function _save(uint _amount) internal {\n        dai.approve(address(yDai), _amount);\n        yDai.deposit(_amount);\n    }\n\n    function _saveUSDC(uint _amount) internal {\n        usdc.approve(address(yUsdc), _amount);\n        yUsdc.deposit(_amount);\n    }\n}\n"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": false,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}

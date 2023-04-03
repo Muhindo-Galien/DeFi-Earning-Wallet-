@@ -1,3 +1,4 @@
+import { useGlobalState } from '@/store';
 import React, { useState } from 'react';
 import { BiChevronDownCircle, BiChevronUpCircle } from 'react-icons/bi';
 
@@ -9,7 +10,11 @@ type Iprops = {
   interestRate: number;
   availableBalance: number;
   contractTokenBalance: number;
-  contractYearnBalance: number;
+  contractYearnBalance: string;
+  AppliedFunction: Function,
+  contracTokentBalance:string,
+  myTokenBalance:number
+
   // open:boolean
 };
 
@@ -22,9 +27,20 @@ const Form = ({
   availableBalance,
   contractYearnBalance,
   contractTokenBalance,
+  AppliedFunction,
+  contracTokentBalance,
+  myTokenBalance
 }: // open
 Iprops) => {
   const [open, setOpen] = useState(false);
+  const [amount,setAmount]=useState('');
+  const [started] = useGlobalState('started');
+
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+    if (!amount || amount == '') return;
+    await  AppliedFunction(amount);
+  };
   return (
     <div className='mx-4 md:mx-0'>
         <div className='max-w-2xl mx-auto shadow-md rounded-lg mt-4 border '>
@@ -44,7 +60,7 @@ Iprops) => {
               <p className='m-0 text-xs text-gray-400'>Interest Rate</p>
             </div>
             <div className='p-0 m-0'>
-              <p className='text-base font-medium'>{availableBalance}.00 DAI </p>
+              <p className='text-base font-medium'>{myTokenBalance} DAI </p>
               <p className='m-0 text-xs text-gray-400'>Available Balance</p>
             </div>
             {!open ? (
@@ -70,12 +86,15 @@ Iprops) => {
               Balance: {contractTokenBalance}.00 {currency}
             </p>
             <input
+              onChange={(e) => setAmount(e.target.value)}
               type='number'
               min={1}
               placeholder='0.00'
               className='bg-transparent border outline-none border-gray-400 py-1 px-2.5 rounded-full w-full'
             />
-            <button className='bg-transparent border border-blue-500 py-1 px-1.5 rounded-full w-full mt-3 text-blue-500'>
+            <button 
+            onClick={handleSubmit}
+            className='bg-transparent border border-blue-500 py-1 px-1.5 rounded-full w-full mt-3 text-blue-500'>
               Earn
             </button>
           </div>
