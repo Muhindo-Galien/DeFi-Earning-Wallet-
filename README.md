@@ -7,8 +7,8 @@ For now the smart contract allows only 2 stable coins (DAI and USDC).
 
 ## Goal
 - Make the smart contract allows all stable coins,
-- Add a nnode script that cheks the contract balance and reinvest it to ke generating interst
-- Allow the wallet to accepet all Natives assets which asks to impliment an intermediary contract
+- Add a node script that checks the contract balance and reinvest it to ke generating interest
+- Allow the wallet to accept all Natives assets which asks to implement an intermediary contract
   to allow Native tokens to be swap to any stable coin of choice be inversting them.
 - Allow the app to support multiple chain
 
